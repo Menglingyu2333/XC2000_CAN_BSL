@@ -1,0 +1,228 @@
+C166 COMPILER V7.54.0.0, MAIN                                                              08/29/2019 09:45:15 PAGE 1   
+
+
+C166 COMPILER V7.54.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\MAIN.obj
+COMPILER INVOKED BY: D:\Keil_C166\C166\BIN\C166.EXE ..\MAIN.C MODV2 BROWSE MODV2 DEBUG OBJECT(.\MAIN.obj) 
+
+ stmt lvl     source
+
+    1         /**************************************************************************
+    2         **                                                                        *
+    3         **  INFINEON XC20007XE16x AP16164 , CAN_loader, Version 1.0               *
+    4         **                                                                        *
+    5         **  Id: Main.c 2009-10-1 YS                                           *
+    6         **                                                                        *
+    7         **  DESCRIPTION :                                                         *
+    8         **        - commands for handshake between ’host?and ’slave?board       *
+    9         **        - Defines a port pin to signal the process status               *
+   10         **        - Flash Programming Functions for XC2xxx (On-chip Flash)        *
+   11         **        - Code location: the internal PSRAM at address 0xE0,0000        *
+   12         **************************************************************************/
+   13         #include "MAIN.H"
+   14         #define ADD_OK               0x01
+   15         #define PROCESS_OK           0x01
+   16         #define CAN_BSL_EXECUTION    0x8F
+   17         #define PLLSTAT_VCOLOCK      0x0008
+   18         #define PLLSTAT_VCOBYST      0x0001
+   19         #define K1_ACK_SET           1U
+   20         #define K2_ACK_SET           1U
+   21         #define P_ACK_SET            1U
+   22         #define N_ACK_SET            1U
+   23         #define K1DIV_SET_1          0U
+   24         #define CLOCK_EN             1U
+   25         #define CLOCK_SEL_FSYS       0U
+   26         #define F_OSC                8
+   27         #define OUTPUT_PUSH_PULL_GPIO  8U
+   28         #define OUTPUT_PUSH_PULL_ALT1  9U
+   29         #define OUTPUT_PUSH_PULL_ALT2  10U
+   30         #define OUTPUT_PUSH_PULL_ALT3  11U
+   31         
+   32         #define VCO_BY_SET             1U
+   33         #define HPOSCCON_MODE          0 // ext.crystal no power-saving
+   34         #define SYSCON0_CLKSEL_F_OSC   1 // CLKSEL 0: fWU, 1: fOSC, 2: fPLL, 3: Reserved
+   35         
+   36         uword uwDatPage_128Byte[64];
+   37         ubyte ubgCommand;
+   38         
+   39         //****************************************************************************
+   40         // @Function      void main(void) 
+   41         //****************************************************************************
+   42         void main(void)
+   43         {
+   44  1        ubyte inx;
+   45  1        ubgCommand=0;
+   46  1       
+   47  1        P0_OUT       =   0x0000;             // output level = high at begin
+   48  1        P0_IOCR04    =   0x0080;             // general purpose output for pin 4
+   49  1        P0_IOCR05    =   0x0080;             // general purpose output for pin 5
+   50  1        P0_IOCR06    =   0x0080;             // general purpose output for pin 6
+   51  1        P0_IOCR07    =   0x0080;             // general purpose output for pin 7
+   52  1       
+   53  1        CAN_HWOBJ[1].uwMOFCRH = 0x0200;       //DLC=2
+   54  1        SendAck(CAN_BSL_EXECUTION, 0);
+   55  1         
+C166 COMPILER V7.54.0.0, MAIN                                                              08/29/2019 09:45:15 PAGE 2   
+
+   56  1        while(1)
+   57  1        {                                     
+   58  2          if(CAN_HWOBJ[0].uwMOCTRL & 0x0008)                    // if NEWDAT 
+   59  2          {
+   60  3            ubgCommand = CAN_HWOBJ[0].MODATAn32bit.uwData[0];
+*** WARNING C192 IN LINE 60 OF ..\MAIN.C: '=': value truncated
+   61  3            CAN_HWOBJ[0].uwMOCTRL = 0x0008;                     // clear NEWDAT
+   62  3          }
+   63  2                  
+   64  2          process_command(); 
+   65  2      
+   66  2                P0_OUT = ~P0_OUT; 
+   67  2                delay();
+   68  2                delay();
+   69  2                delay();
+   70  2                delay();
+   71  2        }
+   72  1      } //  End of function main
+*** WARNING C47 IN LINE 44 OF ..\MAIN.C: 'inx': unreferenced local variable
+   73         
+   74         
+   75         void delay_ms(int ms)
+   76         {
+   77  1              int i,j;
+   78  1              char k;
+   79  1              for(i=0;i<ms;i++)
+   80  1              {
+   81  2                      for(k=0;k<10;k++)
+   82  2                              for(j=0;j<8000;j++)
+   83  2                                      ;
+   84  2              }
+   85  1      }
+   86         ///////////////////////////////////////////////////////////////////////////////
+   87         // ReceiveDataBlock
+   88         ///////////////////////////////////////////////////////////////////////////////
+   89         void ReceiveDataBlock(void)        // receive data and store it to 0xC000 
+   90         {
+   91  1        uword i;
+   92  1        for (i = 0; i < (16*4); i+=4)   // 128 bytes, 64 words
+   93  1        {
+   94  2          while (!(CAN_HWOBJ[0].uwMOCTRL & 0x0008)); // wait until NEWDAT
+   95  2          {
+   96  3            // store the datas from the CAN Messages
+   97  3            uwDatPage_128Byte[0+i]=CAN_HWOBJ[0].MODATAn32bit.uwData[0];
+   98  3            uwDatPage_128Byte[1+i]=CAN_HWOBJ[0].MODATAn32bit.uwData[1];
+   99  3            uwDatPage_128Byte[2+i]=CAN_HWOBJ[0].MODATAn32bit.uwData[2];
+  100  3            uwDatPage_128Byte[3+i]=CAN_HWOBJ[0].MODATAn32bit.uwData[3];
+  101  3          }
+  102  2          CAN_HWOBJ[0].uwMOCTRL = 0x0008;                     // clear NEWDAT
+  103  2        }           
+  104  1      }
+  105         
+  106         void ProgramBlock(ulong ulBaseAddr, ubyte ubPageNr)
+  107         {
+  108  1        ulong ulAddr; 
+  109  1        ubyte ubTmp=1;
+  110  1        ReceiveDataBlock();                               // receive data from CAN interface and store it to 0xC
+             -000
+  111  1        
+  112  1        ulAddr = ulBaseAddr + 0x80 * ubPageNr;  
+  113  1        ubTmp = Flash_erase_page(ulAddr);
+*** WARNING C192 IN LINE 113 OF ..\MAIN.C: '=': value truncated
+C166 COMPILER V7.54.0.0, MAIN                                                              08/29/2019 09:45:15 PAGE 3   
+
+  114  1        while (ubTmp); 
+  115  1        if (ubTmp==0)
+  116  1        {
+  117  2          ubTmp = Flash_ProgramPage(ulAddr, &uwDatPage_128Byte); // data from 0xC000
+*** WARNING C192 IN LINE 117 OF ..\MAIN.C: '=': value truncated
+  118  2          SendAck(ubTmp, ubPageNr);  // '00'= ok, '01'= fail
+  119  2        }
+  120  1      }
+  121         
+  122         ///////////////////////////////////////////////////////////////////////////////
+  123         // Decode the Command receive in the CAN message and perform it
+  124         ///////////////////////////////////////////////////////////////////////////////
+  125         void process_command(void)
+  126         {
+  127  1        uword uwAddressValid=0; 
+  128  1        ulong ulBaseAddr;
+  129  1        ubyte ubTmp=1, ubPageNr;
+  130  1      
+  131  1        switch(ubgCommand)      // scan the type of the operation requested
+  132  1        {
+  133  2          case 0x01: //programming page operation
+  134  2          {
+  135  3               ulBaseAddr = (CAN_HWOBJ[0].MODATAn32bit.ubData[3]);//upper bits
+  136  3               ulBaseAddr = (ulBaseAddr<<8)|CAN_HWOBJ[0].MODATAn32bit.ubData[2];//middle bits
+  137  3               ulBaseAddr = (ulBaseAddr<<8)|CAN_HWOBJ[0].MODATAn32bit.ubData[1];//middle bits
+  138  3               Flash_Init (ulBaseAddr);
+  139  3               ProgramBlock(ulBaseAddr, ubPageNr); 
+  140  3               break;
+  141  3          }
+  142  2         case 0x03://sector erasing operation 
+  143  2         {
+  144  3              ubyte ubSector_Nr, uwTmp; 
+  145  3              ubSector_Nr = CAN_HWOBJ[0].MODATAn32bit.ubData[1];
+  146  3              ulBaseAddr = calculate_sector (ubSector_Nr);
+  147  3              Flash_Init (ulBaseAddr);
+  148  3              uwTmp = Flash_erase_sector(ulBaseAddr);
+*** WARNING C192 IN LINE 148 OF ..\MAIN.C: '=': value truncated
+  149  3              SendAck(uwTmp, 0);  // '00'= ok, '01'= fail
+  150  3              break;
+  151  3         }      
+  152  2         case 0x20:// Done downloading so do a software reset      for standard start
+  153  2         {
+  154  3              delay(); 
+  155  3              SCU_SWRSTCON = 0x0000;       //SWCFG =0000,0000b (standard start)
+  156  3              SCU_RSTCON0 = 0xC000;        //.SW=application reset            
+  157  3              SCU_SWRSTCON|=0x0003;         // generate reset
+  158  3              break;
+  159  3         }
+  160  2         case 0x21:// Done downloading so do a software reset      for CAN BSL
+  161  2         {
+  162  3              SendAck(0x00, 0);                  // Send back an Ack to trasmitter
+  163  3              delay(); 
+  164  3              SCU_SWRSTCON = 0x0D00;       //SWCFG =0000,1101b (CAN BSL)
+  165  3              SCU_RSTCON0 = 0xC000;        //.SW=application reset            
+  166  3              SCU_SWRSTCON|=0x0003;        // generate reset
+  167  3              break;
+  168  3         }
+  169  2         case 0x51: //16k application code (from UConnect C0,0000-C0,3FFF)
+  170  2         {
+  171  3              uword uwPageNr;
+  172  3              ulBaseAddr = 0x00C00000;
+  173  3              Flash_Init (ulBaseAddr);
+C166 COMPILER V7.54.0.0, MAIN                                                              08/29/2019 09:45:15 PAGE 4   
+
+  174  3              SendAck(0x00, 0);                                 // Send back an Ack to trasmitter
+  175  3      
+  176  3              for (uwPageNr=0; uwPageNr<=(4*8*4 -1); uwPageNr++) // receive 16K   
+  177  3              {
+  178  4                ProgramBlock(ulBaseAddr, (ubyte)uwPageNr);
+  179  4              }
+  180  3              break;
+  181  3           }
+  182  2           default:// if a bad commamd is received
+  183  2             break;
+  184  2         }
+  185  1         ubgCommand = 0x00; 
+  186  1      }
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         602     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =         129     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+
+
+C166 COMPILATION COMPLETE.  5 WARNING(S),  0 ERROR(S)

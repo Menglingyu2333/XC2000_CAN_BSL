@@ -1,0 +1,147 @@
+TASKING C166/ST10 linker/locator v8.7r3 Build 272 SN 00099001           Date: Oct 12 2009  Time: 10:42:58  Page:   1
+can_loader
+
+Memory map     : 
+
+Name                        No. Start      End        Length  Type Algn Comb Mem T Group           Class             Module        
+------------------------------------------------------------------------------------------------------------------------------------
+C166_US2...................   8 00C000h    .......    000000h LDAT WORD GUSK RAM ................. CUSTACK.......... CSTART........
+C166_US1...................   7 00C000h    .......    000000h LDAT WORD GUSK RAM ................. CUSTACK.......... CSTART........
+C166_US0...................   6 00C000h    .......    000000h LDAT WORD GUSK RAM ................. CUSTACK.......... CSTART........
+MAIN_2_NB..................   1 00C000h    00C081h    000082h LDAT WORD GLOB RAM ................. CNEAR............ MAIN_C........
+C166_US....................   2 00C082h    00C0C9h    000048h LDAT WORD GUSK RAM ................. CUSTACK.......... MAIN_C........
+                                                                                                                     CSTART........
+                                                                                                                     FLASHDEV_C....
+FLASHDEV_2_NB..............  11 00C0CAh    00C0CDh    000004h LDAT WORD GLOB RAM ................. CNEAR............ FLASHDEV_C....
+Internal IO area........... ... 00E000h    00EFFFh    001000h .... .... .... RAM ................. ................. ..............
+Extended SFR Area.......... ... 00F000h    00F1FFh    000200h .... .... .... RAM ................. ................. ..............
+Reserved................... ... 00F200h    00F5FFh    000400h .... .... .... ... ................. ................. ..............
+Reg. bank 0................ ... 00F600h    00F61Fh    000020h .... WORD .... RAM ................. ................. ..............
+C166_SYSSTACK..............   9 00FA00h    00FBFFh    000200h HDAT WORD SSTK RAM ................. ................. CSTART........
+SFR Area................... ... 00FE00h    00FFFFh    000200h .... .... .... RAM ................. ................. ..............
+Reserved................... ... BF0000h    BFFFFFh    010000h .... .... .... ... ................. ................. ..............
+Reserved................... ... C0F000h    C0FFFFh    001000h .... .... .... ... ................. ................. ..............
+?INTVECT................... ... E00000h    E00003h    000004h .... .... .... ROM ................. ................. ..............
+MAIN_1_PR..................   0 E00004h    E00249h    000246h CODE WORD GLOB ROM ................. CPROGRAM......... MAIN_C........
+C166_BSS...................   3 E0024Ah    E00257h    00000Eh PDAT WORD GLOB ROM ................. CINITROM......... MAIN_C........
+                                                                                                                     FLASHDEV_C....
+__C_INIT_PR................   4 E00258h    E003CBh    000174h CODE WORD GLOB ROM ................. C_INIT........... CSTART........
+__CSTART_PR................   5 E003CCh    E0041Bh    000050h CODE WORD GLOB ROM ................. CPROGRAM......... CSTART........
+FLASHDEV_1_PR..............  10 E0041Ch    E00681h    000266h CODE WORD GLOB ROM ................. CPROGRAM......... FLASHDEV_C....
+CAN_1_PR...................  12 E00682h    E006F5h    000074h CODE WORD GLOB ROM ................. CPROGRAM......... CAN_C.........
+C166_INIT..................  13 E006F6h    E006F7h    000002h PDAT WORD GLOB ROM ................. CINITROM......... can_loader....
+
+
+Symbol table   : main.obj(MAIN_C)
+
+Symbol                                     No. Value     Type       Symbol                                     No. Value     Type   
+----------------------------------------------------------------    ----------------------------------------------------------------
+ <NO NAME>................................ ... 0000000h  REG LOC    _Flash_Init...............................  10 0E004C6h  FAR EXT
+_Flash_ProgramPage........................  10 0E00594h  FAR EXT    _Flash_erase_page.........................  10 0E00536h  FAR EXT
+_Flash_erase_sector.......................  10 0E004D6h  FAR EXT    _ProgramBlock.............................   0 0E000DEh  FAR GLB
+_ReceiveDataBlock.........................   0 0E00088h  FAR GLB    _SendAck..................................  12 0E0069Ch  FAR EXT
+__CSTART..................................   5 0E003CCh  FAR EXT    _calculate_sector.........................  10 0E00658h  FAR EXT
+_delay....................................  10 0E00674h  FAR EXT    _main.....................................   0 0E00004h  FAR GLB
+_process_command..........................   0 0E0012Eh  FAR GLB    _ubgCommand...............................   1 000C000h  BYT GLB
+_uwDatPage_128Byte........................   1 000C002h  WOR GLB    
+
+
+Symbol table   : start.obj(CSTART)
+
+Symbol                                     No. Value     Type       Symbol                                     No. Value     Type   
+----------------------------------------------------------------    ----------------------------------------------------------------
+?BASE_DPP0................................ ABS 0E00000h  WOR EXT    ?BASE_DPP1................................ ABS 0E04000h  WOR EXT
+?BASE_DPP2................................ ABS 0E08000h  WOR EXT    ?C166_BSS_HEAD............................   3 0E0024Ah  WOR EXT
+?C166_INIT_HEAD...........................  13 0E006F6h  WOR EXT    ?SYSSTACK_BOTTOM.......................... ABS 000FA00h  WOR EXT
+?SYSSTACK_TOP............................. ABS 000FC00h  WOR EXT    ?USRSTACK0_BOTTOM.........................   6 000C000h  WOR EXT
+?USRSTACK0_TOP............................   6 000C000h  WOR EXT    ?USRSTACK1_BOTTOM.........................   7 000C000h  WOR EXT
+?USRSTACK1_TOP............................   7 000C000h  WOR EXT    ?USRSTACK_BOTTOM..........................   2 000C082h  WOR EXT
+?USRSTACK_TOP.............................   2 000C0CAh  WOR EXT    CSTART_RBANK.............................. ... 000F600h  REG LOC
+__CSTART..................................   5 0E003CCh  FAR GLB    __CSTART_INUM............................. ... 0000000h  INT GLB
+TASKING C166/ST10 linker/locator v8.7r3 Build 272 SN 00099001           Date: Oct 12 2009  Time: 10:42:58  Page:   2
+can_loader
+
+__CSTART_TASK.............................   5 0E003CCh  TSK LOC    __C_INIT..................................   4 0E00258h  FAR GLB
+__EXIT....................................   5 0E00416h  FAR GLB    __IDLE....................................   5 0E00416h  FAR GLB
+_main.....................................   0 0E00004h  FAR EXT    
+
+
+Symbol table   : flashdev.obj(FLASHDEV_C)
+
+Symbol                                     No. Value     Type       Symbol                                     No. Value     Type   
+----------------------------------------------------------------    ----------------------------------------------------------------
+ <NO NAME>................................ ... 0000000h  REG LOC    _Flash_Check..............................  10 0E0041Ch  FAR GLB
+_Flash_Init...............................  10 0E004C6h  FAR GLB    _Flash_ProgramPage........................  10 0E00594h  FAR GLB
+_Flash_UnInit.............................  10 0E004D2h  FAR GLB    _Flash_erase_page.........................  10 0E00536h  FAR GLB
+_Flash_erase_sector.......................  10 0E004D6h  FAR GLB    _base.....................................  11 000C0CAh  WOR GLB
+_calculate_sector.........................  10 0E00658h  FAR GLB    _delay....................................  10 0E00674h  FAR GLB
+
+
+
+Symbol table   : can.obj(CAN_C)
+
+Symbol                                     No. Value     Type       Symbol                                     No. Value     Type   
+----------------------------------------------------------------    ----------------------------------------------------------------
+ <NO NAME>................................ ... 0000000h  REG LOC    _CAN_vTransmit............................  12 0E00682h  FAR GLB
+_SendAck..................................  12 0E0069Ch  FAR GLB    
+
+
+Interrupt table: 
+
+Vector   Intno Start    Intnoname                                              Taskname                                             
+------------------------------------------------------------------------------------------------------------------------------------
+0E00000h 0000h 0E003CCh __CSTART_INUM......................................... __CSTART_TASK........................................
+
+Locate summary : 
+
+Class       Name          Size  Start
+<NO NAME>   ?INTVECT      00004h E00000h 
+            C166_SYSSTACK 00200h 00FA00h 
+      Total class size: 0000204h
+
+CNEAR       FLASHDEV_2_NB 00004h 00C0CAh 
+            MAIN_2_NB     00082h 00C000h 
+      Total class size: 0000086h
+
+CPROGRAM    CAN_1_PR      00074h E00682h 
+            FLASHDEV_1_PR 00266h E0041Ch 
+            MAIN_1_PR     00246h E00004h 
+            __CSTART_PR   00050h E003CCh 
+      Total class size: 0000570h
+
+CINITROM    C166_BSS      0000Eh E0024Ah 
+            C166_INIT     00002h E006F6h 
+      Total class size: 0000010h
+
+CUSTACK     C166_US       00048h 00C082h 
+            C166_US0      00000h 00C000h 
+            C166_US1      00000h 00C000h 
+            C166_US2      00000h 00C000h 
+      Total class size: 0000048h
+TASKING C166/ST10 linker/locator v8.7r3 Build 272 SN 00099001           Date: Oct 12 2009  Time: 10:42:58  Page:   3
+can_loader
+
+
+C_INIT      __C_INIT_PR   00174h E00258h 
+      Total class size: 0000174h
+
+Total size:             00009C6h
+
+
+	Number of symbols		: 652
+	Number of sections		: 15
+	Number of groups		: 0
+	Number of classes		: 5
+	Number of modules		: 4
+	Total section size		: 00009C6h
+	Total memory size		: 0002A00h
+		consisting of RAM	: 0001A00h
+		              ROM	: 0001000h
+	Total RAM filled		: 00002CEh
+	Total ROM filled		: 00006F8h
+	System stack size		: 0000200h
+	Heap size			: 0000000h
+	User stack size			: 0000048h
+	Time spent			: 00:00:2.20
+
+Error report   : total errors: 0, warnings: 0

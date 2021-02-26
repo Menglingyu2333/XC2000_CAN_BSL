@@ -1,0 +1,452 @@
+L166 LINKER/LOCATER V5.29.2.0                                                           12/10/2020  15:58:48  PAGE 1
+
+
+L166 LINKER/LOCATER V5.29.2.0, INVOKED BY:
+C:\KEIL_V5\C166\BIN\L166.EXE .\CAN.obj, .\FlashDev.obj, .\MAIN.obj TO CAN_Loader CLASSES (NDATA (0XE00000-0XE01FFF), NDA
+>> TA0 (0XE00000-0XE01FFF), SDATA (0XF600-0XFDFF), SDATA0 (0XF600-0XFDFF), IDATA (0XF600-0XFDFF), IDATA0 (0XF600-0XFDFF)
+>> , FDATA (0XE00000-0XE01FFF), FDATA0 (0XE00000-0XE01FFF), HDATA (0XE00000-0XE01FFF), HDATA0 (0XE00000-0XE01FFF), XDATA
+>>  (0XE00000-0XE01FFF), XDATA0 (0XE00000-0XE01FFF))
+
+
+CPU TYPE:     C167 or derivative
+CPU MODE:     SEGMENTED
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\CAN.obj (CAN)
+         COMMENT TYPE 128: C166 V7.54.0.0
+  .\FlashDev.obj (FLASHDEV)
+         COMMENT TYPE 128: C166 V7.54.0.0
+  .\MAIN.obj (MAIN)
+         COMMENT TYPE 128: C166 V7.54.0.0
+  C:\KEIL_V5\C166\LIB\C167S.LIB (?C_STARTUP)
+         COMMENT TYPE 128: A166 V5.36.0.1
+  C:\KEIL_V5\C166\LIB\C167S.LIB (?C_ENDINIT)
+         COMMENT TYPE 128: A166 V5.36.0.1
+
+
+INTERRUPT PROCEDURES OF MODULE:  CAN_Loader (CAN)
+
+
+INTERRUPT PROCEDURE                 INT  INTERRUPT NAME
+=======================================================
+?C_RESET                              0  RESET
+
+
+MEMORY MAP OF MODULE:  CAN_Loader (CAN)
+
+
+START     STOP      LENGTH    TYPE  RTYP  ALIGN  TGR  GRP  COMB  CLASS   SECTION NAME
+=====================================================================================
+000000H   000003H   000004H   ---   ---   ---    ---  ---  ---   * INTVECTOR TABLE *
+000004H   00025DH   00025AH   CODE  REL   WORD   ---    1  PUBL  NCODE   ?PR?MAIN
+00025EH   0004A9H   00024CH   CODE  REL   WORD   ---    1  PUBL  NCODE   ?PR?FLASHDEV
+0004AAH   000517H   00006EH   CODE  REL   WORD   ---    1  PUBL  NCODE   ?PR?CAN
+000518H   000635H   00011EH   CODE  REL   WORD   ---  ---  PRIV  ICODE   ?C_STARTUP_CODE
+000636H   000637H   000002H   XDATA REL   WORD   ---  ---  GLOB  ---     ?C_INITSEC
+000638H   000641H   00000AH   CONST ABS   WORD   ---  ---  PRIV  ---     ?C_CLRMEMSEC
+00FA00H   00FBFFH   000200H   ---   ---   ---    ---  ---  ---   * SYSTEM STACK *
+00FC00H   00FC1FH   000020H   DATA  ---   BYTE   ---  ---  ---   *REG*   ?C_MAINREGISTERS
+E00000H   E00FFFH   001000H   DATA  REL   WORD   ---    2  PUBL  NDATA   ?C_USERSTACK
+E01000H   E01080H   000081H   DATA  REL   WORD   ---    2  PUBL  NDATA0  ?ND0?MAIN
+E01082H   E01085H   000004H   DATA  REL   WORD   ---    2  PUBL  NDATA0  ?ND0?FLASHDEV
+
+
+
+GROUP LIST OF MODULE:  CAN_Loader (CAN)
+
+
+GROUP NAME                           TYPE  TGR  GRP  CLASS       SECTION NAME
+=============================================================================
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 2
+
+
+NCODE                                CODE  ---    1  NCODE       ?PR?CAN
+                                                     NCODE       ?PR?FLASHDEV
+                                                     NCODE       ?PR?MAIN
+
+NDATA                                DATA  ---    2  NDATA0      ?ND0?FLASHDEV
+                                                     NDATA0      ?ND0?MAIN
+                                                     NDATA       ?C_USERSTACK
+
+
+
+
+PUBLIC SYMBOLS OF MODULE:  CAN_Loader (CAN)
+
+
+      VALUE       PUBLIC SYMBOL NAME               REP   TGR  CLASS   SECTION
+      =======================================================================
+      000638H     ?C_CLRMEMSECSTART                VAR   ---  ---     ---
+      000636H     ?C_ENDINIT                       VAR   ---  ---     ?C_INITSEC
+      000636H     ?C_INITSECSTART                  VAR   ---  ---     ---
+000000001FFFC000H ?C_NCONSTBASE                    CONST ---  ---     ---
+000000001FFFFFFFH ?C_NCONSTBASESEG                 CONST ---  ---     ---
+      DF8000H     ?C_NDATABASE                     CONST ---  ---     ---
+      0000DFH     ?C_NDATABASESEG                  CONST ---  ---     ---
+      000000H     ?C_PAGEDPP0                      CONST ---  ---     ---
+      000000H     ?C_PAGEDPP1                      CONST ---  ---     ---
+      000380H     ?C_PAGEDPP2                      CONST ---  ---     ---
+      000518H     ?C_STARTUP                       LABEL ---  ICODE   ?C_STARTUP_CODE
+      00FA00H     ?C_SYSSTKBOT                     CONST ---  ---     ---
+      00FC00H     ?C_SYSSTKTOP                     CONST ---  ---     ---
+      E00000H     ?C_USRSTKBOT                     VAR   ---  NDATA   ?C_USERSTACK
+      0004AAH     CAN_vTransmit                    LABEL ---  NCODE   ?PR?CAN
+      00025EH     Flash_Check                      LABEL ---  NCODE   ?PR?FLASHDEV
+      000302H     Flash_Init                       LABEL ---  NCODE   ?PR?FLASHDEV
+      0003C0H     Flash_ProgramPage                LABEL ---  NCODE   ?PR?FLASHDEV
+      00030EH     Flash_UnInit                     LABEL ---  NCODE   ?PR?FLASHDEV
+      00036AH     Flash_erase_page                 LABEL ---  NCODE   ?PR?FLASHDEV
+      000312H     Flash_erase_sector               LABEL ---  NCODE   ?PR?FLASHDEV
+      0000EAH     ProgramBlock                     LABEL ---  NCODE   ?PR?MAIN
+      000000H     RESET                            INTNO ---  ---     ---
+      000094H     ReceiveDataBlock                 LABEL ---  NCODE   ?PR?MAIN
+      0004BEH     SendAck                          LABEL ---  NCODE   ?PR?CAN
+      E01082H     base                             VAR   ---  NDATA0  ?ND0?FLASHDEV
+      00046AH     calculate_sector                 LABEL ---  NCODE   ?PR?FLASHDEV
+      000492H     delay                            LABEL ---  NCODE   ?PR?FLASHDEV
+      000076H     delay_ms                         LABEL ---  NCODE   ?PR?MAIN
+      000004H     main                             LABEL ---  NCODE   ?PR?MAIN
+      000142H     process_command                  LABEL ---  NCODE   ?PR?MAIN
+      E01080H     ubgCommand                       VAR   ---  NDATA0  ?ND0?MAIN
+      E01000H     uwDatPage_128Byte                VAR   ---  NDATA0  ?ND0?MAIN
+
+
+
+SYMBOL TABLE OF MODULE:  CAN_Loader (CAN)
+
+      VALUE       TYPE      REP       LENGTH  TGR   SYMBOL NAME
+      =========================================================
+      0004BEH     PUBLIC    LABEL     ---     ---   SendAck
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 3
+
+
+      0004AAH     PUBLIC    LABEL     ---     ---   CAN_vTransmit
+
+      0004AAH     BLOCK     LVL=0     0014H   ---   CAN_vTransmit
+      000048H     SYMBOL    REG       ---     ---   ubObjNr
+      0004AAH     LINE      ---       ---     ---   #18
+      0004AAH     LINE      ---       ---     ---   #20
+      0004BCH     LINE      ---       ---     ---   #21
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      0004BEH     BLOCK     LVL=0     005AH   ---   SendAck
+      000048H     SYMBOL    REG       ---     ---   ubACK
+      000049H     SYMBOL    REG       ---     ---   ubTmp
+      0004BEH     LINE      ---       ---     ---   #26
+      0004BEH     LINE      ---       ---     ---   #28
+      0004C8H     LINE      ---       ---     ---   #29
+      0004D2H     LINE      ---       ---     ---   #30
+      0004DCH     LINE      ---       ---     ---   #31
+      0004E8H     LINE      ---       ---     ---   #32
+      00050AH     LINE      ---       ---     ---   #33
+      000516H     LINE      ---       ---     ---   #35
+      ---         BLOCKEND  LVL=0     ---     ---   
+      000302H     PUBLIC    LABEL     ---     ---   Flash_Init
+      00036AH     PUBLIC    LABEL     ---     ---   Flash_erase_page
+      000312H     PUBLIC    LABEL     ---     ---   Flash_erase_sector
+      00025EH     PUBLIC    LABEL     ---     ---   Flash_Check
+      0003C0H     PUBLIC    LABEL     ---     ---   Flash_ProgramPage
+      00030EH     PUBLIC    LABEL     ---     ---   Flash_UnInit
+      00046AH     PUBLIC    LABEL     ---     ---   calculate_sector
+      000492H     PUBLIC    LABEL     ---     ---   delay
+      E01082H     PUBLIC    VAR       ---     ---   base
+
+      00025EH     BLOCK     LVL=0     00A4H   ---   Flash_Check
+      000260H     BLOCK     LVL=1     009EH   ---   
+      000000H     SYMBOL    AUTO      ---     ---   fbr
+      000002H     SYMBOL    AUTO      ---     ---   fop
+      000004H     SYMBOL    AUTO      ---     ---   fpr
+      ---         BLOCKEND  LVL=1     ---     ---   
+      00025EH     LINE      ---       ---     ---   #72
+      000260H     LINE      ---       ---     ---   #77
+      000260H     LINE      ---       ---     ---   #78
+      00026AH     LINE      ---       ---     ---   #79
+      00027CH     LINE      ---       ---     ---   #81
+      000288H     LINE      ---       ---     ---   #82
+      000294H     LINE      ---       ---     ---   #84
+      0002A4H     LINE      ---       ---     ---   #85
+      0002C2H     LINE      ---       ---     ---   #86
+      0002C2H     LINE      ---       ---     ---   #88
+      0002DAH     LINE      ---       ---     ---   #89
+      0002F8H     LINE      ---       ---     ---   #90
+      0002FCH     LINE      ---       ---     ---   #91
+      0002FCH     LINE      ---       ---     ---   #92
+      0002FEH     LINE      ---       ---     ---   #93
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000302H     BLOCK     LVL=0     000CH   ---   Flash_Init
+      000008H     SYMBOL    REG       ---     ---   adr
+      000302H     LINE      ---       ---     ---   #100
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 4
+
+
+      000302H     LINE      ---       ---     ---   #101
+      00030AH     LINE      ---       ---     ---   #102
+      00030CH     LINE      ---       ---     ---   #103
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      00030EH     BLOCK     LVL=0     0004H   ---   Flash_UnInit
+      00030EH     LINE      ---       ---     ---   #110
+      00030EH     LINE      ---       ---     ---   #111
+      000310H     LINE      ---       ---     ---   #112
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000312H     BLOCK     LVL=0     0058H   ---   Flash_erase_sector
+      000008H     SYMBOL    REG       ---     ---   ulSector_Addr
+      000312H     LINE      ---       ---     ---   #120
+      000312H     LINE      ---       ---     ---   #121
+      000334H     LINE      ---       ---     ---   #122
+      00034EH     LINE      ---       ---     ---   #123
+      000364H     LINE      ---       ---     ---   #124
+      000368H     LINE      ---       ---     ---   #125
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      00036AH     BLOCK     LVL=0     0056H   ---   Flash_erase_page
+      000008H     SYMBOL    REG       ---     ---   ulPage_Addr
+      00036AH     LINE      ---       ---     ---   #132
+      00036AH     LINE      ---       ---     ---   #133
+      00038CH     LINE      ---       ---     ---   #134
+      0003A6H     LINE      ---       ---     ---   #135
+      0003BAH     LINE      ---       ---     ---   #136
+      0003BEH     LINE      ---       ---     ---   #137
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      0003C0H     BLOCK     LVL=0     00AAH   ---   Flash_ProgramPage
+      000008H     SYMBOL    REG       ---     ---   page_adr
+      00000AH     SYMBOL    REG       ---     ---   buf
+      0003C0H     BLOCK     LVL=1     00A8H   ---   
+      000007H     SYMBOL    REG       ---     ---   cnt
+      000008H     SYMBOL    REG       ---     ---   uwTmp
+      ---         BLOCKEND  LVL=1     ---     ---   
+      0003C0H     LINE      ---       ---     ---   #145
+      0003C0H     LINE      ---       ---     ---   #148
+      0003DEH     LINE      ---       ---     ---   #149
+      0003F4H     LINE      ---       ---     ---   #150
+      0003FAH     LINE      ---       ---     ---   #152
+      0003FEH     LINE      ---       ---     ---   #155
+      000400H     LINE      ---       ---     ---   #156
+      000420H     LINE      ---       ---     ---   #157
+      000422H     LINE      ---       ---     ---   #158
+      000428H     LINE      ---       ---     ---   #160
+      000442H     LINE      ---       ---     ---   #161
+      000460H     LINE      ---       ---     ---   #162
+      000466H     LINE      ---       ---     ---   #163
+      000466H     LINE      ---       ---     ---   #164
+      000468H     LINE      ---       ---     ---   #165
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      00046AH     BLOCK     LVL=0     0028H   ---   calculate_sector
+      000048H     SYMBOL    REG       ---     ---   ubSectorNr
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 5
+
+
+      00046AH     BLOCK     LVL=1     0026H   ---   
+      000005H     SYMBOL    REG       ---     ---   uwAddrH
+      000009H     SYMBOL    REG       ---     ---   uwAddrL
+      000004H     SYMBOL    REG       ---     ---   ulAddr
+      ---         BLOCKEND  LVL=1     ---     ---   
+      00046AH     LINE      ---       ---     ---   #173
+      00046AH     LINE      ---       ---     ---   #176
+      00046CH     LINE      ---       ---     ---   #177
+      000470H     LINE      ---       ---     ---   #178
+      000472H     LINE      ---       ---     ---   #180
+      000474H     LINE      ---       ---     ---   #181
+      000478H     LINE      ---       ---     ---   #182
+      00047EH     LINE      ---       ---     ---   #183
+      000490H     LINE      ---       ---     ---   #184
+      000490H     LINE      ---       ---     ---   #185
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000492H     BLOCK     LVL=0     0018H   ---   delay
+      000492H     BLOCK     LVL=1     0016H   ---   
+      000006H     SYMBOL    REG       ---     ---   counter
+      ---         BLOCKEND  LVL=1     ---     ---   
+      000492H     LINE      ---       ---     ---   #190
+      000492H     LINE      ---       ---     ---   #191
+      000492H     LINE      ---       ---     ---   #193
+      0004A8H     LINE      ---       ---     ---   #194
+      ---         BLOCKEND  LVL=0     ---     ---   
+      000004H     GLOBAL    LABEL     ---     ---   main
+      000076H     PUBLIC    LABEL     ---     ---   delay_ms
+      0000EAH     PUBLIC    LABEL     ---     ---   ProgramBlock
+      000142H     PUBLIC    LABEL     ---     ---   process_command
+      000094H     PUBLIC    LABEL     ---     ---   ReceiveDataBlock
+      E01000H     PUBLIC    VAR       ---     ---   uwDatPage_128Byte
+      E01080H     PUBLIC    VAR       ---     ---   ubgCommand
+
+      000004H     BLOCK     LVL=0     0072H   ---   main
+      000004H     LINE      ---       ---     ---   #42
+      000004H     LINE      ---       ---     ---   #43
+      000004H     LINE      ---       ---     ---   #45
+      000008H     LINE      ---       ---     ---   #47
+      00000CH     LINE      ---       ---     ---   #48
+      000014H     LINE      ---       ---     ---   #49
+      000018H     LINE      ---       ---     ---   #50
+      00001CH     LINE      ---       ---     ---   #51
+      000020H     LINE      ---       ---     ---   #53
+      00002CH     LINE      ---       ---     ---   #54
+      000036H     LINE      ---       ---     ---   #56
+      000036H     LINE      ---       ---     ---   #58
+      000042H     LINE      ---       ---     ---   #60
+      00004EH     LINE      ---       ---     ---   #61
+      000058H     LINE      ---       ---     ---   #62
+      000058H     LINE      ---       ---     ---   #64
+      00005AH     LINE      ---       ---     ---   #66
+      000064H     LINE      ---       ---     ---   #67
+      000068H     LINE      ---       ---     ---   #68
+      00006CH     LINE      ---       ---     ---   #69
+      000070H     LINE      ---       ---     ---   #70
+      000074H     LINE      ---       ---     ---   #71
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 6
+
+
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000076H     BLOCK     LVL=0     001EH   ---   delay_ms
+      000008H     SYMBOL    REG       ---     ---   ms
+      000076H     BLOCK     LVL=1     001CH   ---   
+      000007H     SYMBOL    REG       ---     ---   i
+      000005H     SYMBOL    REG       ---     ---   j
+      00008CH     SYMBOL    REG       ---     ---   k
+      ---         BLOCKEND  LVL=1     ---     ---   
+      000076H     LINE      ---       ---     ---   #75
+      000076H     LINE      ---       ---     ---   #76
+      000076H     LINE      ---       ---     ---   #79
+      00007AH     LINE      ---       ---     ---   #81
+      00007CH     LINE      ---       ---     ---   #82
+      00007EH     LINE      ---       ---     ---   #83
+      00008CH     LINE      ---       ---     ---   #84
+      000092H     LINE      ---       ---     ---   #85
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000094H     BLOCK     LVL=0     0056H   ---   ReceiveDataBlock
+      000094H     BLOCK     LVL=1     0054H   ---   
+      000006H     SYMBOL    REG       ---     ---   i
+      ---         BLOCKEND  LVL=1     ---     ---   
+      000094H     LINE      ---       ---     ---   #89
+      000094H     LINE      ---       ---     ---   #90
+      000094H     LINE      ---       ---     ---   #92
+      000096H     LINE      ---       ---     ---   #94
+      0000A2H     LINE      ---       ---     ---   #97
+      0000B2H     LINE      ---       ---     ---   #98
+      0000BEH     LINE      ---       ---     ---   #99
+      0000CAH     LINE      ---       ---     ---   #100
+      0000D6H     LINE      ---       ---     ---   #102
+      0000E0H     LINE      ---       ---     ---   #103
+      0000E8H     LINE      ---       ---     ---   #104
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      0000EAH     BLOCK     LVL=0     0058H   ---   ProgramBlock
+      000008H     SYMBOL    REG       ---     ---   ulBaseAddr
+      00004DH     SYMBOL    REG       ---     ---   ubPageNr
+      0000F2H     BLOCK     LVL=1     0048H   ---   
+      000000H     SYMBOL    AUTO      ---     ---   ulAddr
+      00004EH     SYMBOL    REG       ---     ---   ubTmp
+      ---         BLOCKEND  LVL=1     ---     ---   
+      0000EAH     LINE      ---       ---     ---   #106
+      0000F2H     LINE      ---       ---     ---   #107
+      0000F2H     LINE      ---       ---     ---   #109
+      0000F4H     LINE      ---       ---     ---   #110
+      0000F6H     LINE      ---       ---     ---   #112
+      000108H     LINE      ---       ---     ---   #113
+      000112H     LINE      ---       ---     ---   #114
+      000118H     LINE      ---       ---     ---   #115
+      00011EH     LINE      ---       ---     ---   #117
+      00012EH     LINE      ---       ---     ---   #118
+      00013AH     LINE      ---       ---     ---   #119
+      ---         BLOCKEND  LVL=0     ---     ---   
+
+      000142H     BLOCK     LVL=0     011CH   ---   process_command
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 7
+
+
+      00014AH     BLOCK     LVL=1     010AH   ---   
+      00000EH     SYMBOL    REG       ---     ---   ulBaseAddr
+      000000H     SYMBOL    AUTO      ---     ---   ubPageNr
+      0001CCH     BLOCK     LVL=2     002CH   ---   
+      000088H     SYMBOL    REG       ---     ---   ubSector_Nr
+      000088H     SYMBOL    REG       ---     ---   uwTmp
+      ---         BLOCKEND  LVL=2     ---     ---   
+      000228H     BLOCK     LVL=2     0028H   ---   
+      00000DH     SYMBOL    REG       ---     ---   uwPageNr
+      ---         BLOCKEND  LVL=2     ---     ---   
+      ---         BLOCKEND  LVL=1     ---     ---   
+      000142H     LINE      ---       ---     ---   #125
+      00014AH     LINE      ---       ---     ---   #126
+      00014AH     LINE      ---       ---     ---   #127
+      00014AH     LINE      ---       ---     ---   #129
+      00014AH     LINE      ---       ---     ---   #131
+      000168H     LINE      ---       ---     ---   #133
+      000168H     LINE      ---       ---     ---   #135
+      000174H     LINE      ---       ---     ---   #136
+      000196H     LINE      ---       ---     ---   #137
+      0001B8H     LINE      ---       ---     ---   #138
+      0001C0H     LINE      ---       ---     ---   #139
+      0001CAH     LINE      ---       ---     ---   #140
+      0001CCH     LINE      ---       ---     ---   #142
+      0001CCH     LINE      ---       ---     ---   #143
+      0001CCH     LINE      ---       ---     ---   #145
+      0001D4H     LINE      ---       ---     ---   #146
+      0001DEH     LINE      ---       ---     ---   #147
+      0001E6H     LINE      ---       ---     ---   #148
+      0001EEH     LINE      ---       ---     ---   #149
+      0001F6H     LINE      ---       ---     ---   #150
+      0001F8H     LINE      ---       ---     ---   #152
+      0001F8H     LINE      ---       ---     ---   #154
+      0001FCH     LINE      ---       ---     ---   #155
+      000202H     LINE      ---       ---     ---   #156
+      000206H     LINE      ---       ---     ---   #157
+      00020AH     LINE      ---       ---     ---   #158
+      00020CH     LINE      ---       ---     ---   #160
+      00020CH     LINE      ---       ---     ---   #162
+      000214H     LINE      ---       ---     ---   #163
+      000218H     LINE      ---       ---     ---   #164
+      00021EH     LINE      ---       ---     ---   #165
+      000222H     LINE      ---       ---     ---   #166
+      000226H     LINE      ---       ---     ---   #167
+      000228H     LINE      ---       ---     ---   #169
+      000228H     LINE      ---       ---     ---   #170
+      000228H     LINE      ---       ---     ---   #172
+      000228H     LINE      ---       ---     ---   #173
+      000232H     LINE      ---       ---     ---   #174
+      00023AH     LINE      ---       ---     ---   #176
+      00023CH     LINE      ---       ---     ---   #178
+      00024AH     LINE      ---       ---     ---   #179
+      000250H     LINE      ---       ---     ---   #180
+      000250H     LINE      ---       ---     ---   #182
+      000250H     LINE      ---       ---     ---   #183
+      000250H     LINE      ---       ---     ---   #184
+      000250H     LINE      ---       ---     ---   #185
+L166 LINKER/LOCATER V5.29.2.0                                                         12/10/2020  15:58:48  PAGE 8
+
+
+      000254H     LINE      ---       ---     ---   #186
+      ---         BLOCKEND  LVL=0     ---     ---   
+      000518H     PUBLIC    LABEL     ---     ---   ?C_STARTUP
+      E00000H     PUBLIC    VAR       ---     ---   ?C_USRSTKBOT
+      00FA00H     PUBLIC    CONST     ---     ---   ?C_SYSSTKBOT
+      00FC00H     PUBLIC    CONST     ---     ---   ?C_SYSSTKTOP
+      000000H     GLOBAL    INTNO     ---     ---   RESET
+
+      000518H     BLOCK     LVL=0     011EH   ---   ?C_RESET
+      ---         BLOCKEND  LVL=0     ---     ---   
+      000636H     PUBLIC    VAR       ---     ---   ?C_ENDINIT
+
+
+
+FUNCTION REGISTER MASKS
+
+
+FUNCTION . . . . . . . REG MASK
+===============================
+
+
+
+
+*** WARNING L22: CLASS RANGE NOT GIVEN IN INVOCATION LINE
+    CLASS:   NCODE
+
+Program Size: data=4231(near=4229) const=10(near=10) code=1586
+L166 RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

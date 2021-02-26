@@ -1,0 +1,6 @@
+---- SWRSTCON Matches (5 in 2 files) ----
+process_command in MAIN.C :         SCU_SWRSTCON = 0x0000;       //SWCFG =0000,0000b (standard start)
+process_command in MAIN.C :         SCU_SWRSTCON|=0x0003;         // generate reset
+process_command in MAIN.C :         SCU_SWRSTCON = 0x0D00;       //SWCFG =0000,1101b (CAN BSL)
+process_command in MAIN.C :         SCU_SWRSTCON|=0x0003;        // generate reset
+XC22xxREGS.H line 9749 : #define SCU_SWRSTCON           (*((uword volatile *) 0xF0AE))

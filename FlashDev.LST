@@ -1,0 +1,230 @@
+C166 COMPILER V7.54.0.0, FLASHDEV                                                          08/29/2019 09:45:15 PAGE 1   
+
+
+C166 COMPILER V7.54.0.0, COMPILATION OF MODULE FLASHDEV
+OBJECT MODULE PLACED IN .\FlashDev.obj
+COMPILER INVOKED BY: D:\Keil_C166\C166\BIN\C166.EXE ..\FlashDev.c MODV2 BROWSE MODV2 DEBUG OBJECT(.\FlashDev.obj) 
+
+ stmt lvl     source
+
+    1         /**************************************************************************
+    2         **                                                                        *
+    3         **  INFINEON XC20007XE16x AP16164 , CAN_loader, Version 1.0               *
+    4         **                                                                        *
+    5         **  Id: FlashDev.c 2009-10-1 YS                                           *
+    6         **                                                                        *
+    7         **  DESCRIPTION :                                                         *
+    8         **        - commands for handshake between ’host?and ’slave?board       *
+    9         **        - Defines a port pin to signal the process status               *
+   10         **        - Flash Programming Functions for XC2xxx (On-chip Flash)        *
+   11         **        - Code location: the internal PSRAM at address 0xE0,0000        *
+   12         **************************************************************************/
+   13         #include  "main.h"
+   14         #include  "XC22xxREGS.H"
+   15         
+   16         struct FlashBlocks  {
+   17           ulong   szBlock;     // Size in Bytes
+   18           ulong AddrBlock;     // Address of Blocks
+   19         };
+   20         
+   21         union uniIMB_FSR_BUSY{
+   22           uword v;
+   23           struct b {
+   24             uword busyfm1  : 1;
+   25             uword busyfm2  : 1;
+   26             uword busyfm3  : 1;
+   27             uword res3     : 1;
+   28             uword res4     : 1;
+   29             uword res5     : 1;
+   30             uword res6     : 1;
+   31             uword res7     : 1;
+   32             uword pagem1   : 1;
+   33             uword pagem2   : 1;
+   34             uword pagem3   : 1;
+   35             //uword reserved_10_15: 6;
+   36           } b;
+   37         };
+   38         
+   39         
+   40         union  uniIMB_FSR_OP{                // Flash State Operations
+   41           uword v;
+   42           struct o{
+   43             uword prog   : 1;
+   44             uword erase  : 1;
+   45             uword power  : 1;
+   46             uword mar    : 1;
+   47             uword sqer   : 1;
+   48             uword oper   : 1;
+   49             //uword reserved_6_15: 10;
+   50           } b;
+   51         };
+   52         
+   53         union uniIMB_FSR_PROT {                // Flash State Protection
+   54           uword v;
+   55           struct p {
+C166 COMPILER V7.54.0.0, FLASHDEV                                                          08/29/2019 09:45:15 PAGE 2   
+
+   56             uword proin  : 1;
+   57             uword proiner: 1;
+   58             uword rprodis: 1;
+   59             uword wprodis: 1;
+   60             uword proer  : 1;
+   61             //uword reserved_5_15: 11;
+   62           } b;
+   63         };
+   64         
+   65         ulong base;               // Device Base Address
+   66         
+   67         /////////////////////////////////////////////////////////
+   68         // Function to Check Status of Flash Device.
+   69         // *    Parameter:      adr:  Block Address
+   70         // *    Return Value:   0 - OK,  1 - Failed
+   71         ////////////////////////////////////////////////////////
+   72         uword Flash_Check (void) {
+   73  1        union uniIMB_FSR_BUSY fbr;
+   74  1        union uniIMB_FSR_OP fop;
+   75  1        union uniIMB_FSR_PROT fpr;
+   76  1      
+   77  1        do {
+   78  2          fbr.v =  (IMB_FSR_BUSY);         // Read Busy Register
+   79  2        } while (fbr.b.busyfm1 || fbr.b.busyfm2 || fbr.b.busyfm3); // Wait until Flash is Busy
+   80  1      
+   81  1        fop.v =  (IMB_FSR_OP);         //Read Operation Register
+   82  1        fpr.v =  (IMB_FSR_PROT);       //Read Protection Register
+   83  1      
+   84  1        if (fop.b.prog || fop.b.erase) {
+   85  2          (*((uword far *) (base |0xAA))) = 0xF5;  // Clear Status
+   86  2        }
+   87  1      
+   88  1        if (fop.b.oper || fop.b.sqer || fpr.b.proer) {
+   89  2          (*((uword far *) (base |0xAA))) = 0xF0;  // Reset to Read Mode
+   90  2          return (1);                              // Failed
+   91  2        }
+   92  1        return (0);                                // Done
+   93  1      }
+   94         
+   95         
+   96         /////////////////////////////////////////////////////////
+   97         // Function to Initialize Flash Programming Functions
+   98         // *    Return Value:   0 - OK,  1 - Failed
+   99         ////////////////////////////////////////////////////////
+  100         uword Flash_Init (ulong adr) {
+  101  1        base = adr;
+  102  1        return (0);
+  103  1      }
+  104         
+  105         
+  106         /////////////////////////////////////////////////////////
+  107         // Function to De-Initialize Flash Programming Functions
+  108         // *    Return Value:   0 - OK,  1 - Failed
+  109         ////////////////////////////////////////////////////////
+  110         uword Flash_UnInit (void) {
+  111  1        return (0);
+  112  1      }
+  113         
+  114         
+  115         /////////////////////////////////////////////////////////
+  116         // Function to erase one sector of the flash.
+  117         // *    Parameter:      adr:  Block Address
+C166 COMPILER V7.54.0.0, FLASHDEV                                                          08/29/2019 09:45:15 PAGE 3   
+
+  118         // *    Return Value:   0 - OK,  1 - Failed
+  119         ////////////////////////////////////////////////////////
+  120         uword Flash_erase_sector (ulong ulSector_Addr) {
+  121  1        (*((uword far *) (base |0xAA))) = 0x80;       // Erase Sector (1. Cycle)
+  122  1        (*((uword far *) (base |0x54))) = 0xAA;       // Erase Sector (2. Cycle)
+  123  1        (*((uword far *) (ulSector_Addr))) = 0x33;    // Erase Sector (3. Cycle)
+  124  1        return (Flash_Check());                             // Check until Device Ready
+  125  1      }
+  126         
+  127         /////////////////////////////////////////////////////////
+  128         // Function to erase one page of the flash.
+  129         // *    Parameter:      adr:  page Address
+  130         // *    Return Value:   0 - OK,  1 - Failed
+  131         ////////////////////////////////////////////////////////
+  132         uword Flash_erase_page (ulong ulPage_Addr) {
+  133  1        (*((uword far *) (base |0xAA))) = 0x80;       // Erase Sector (1. Cycle)
+  134  1        (*((uword far *) (base |0x54))) = 0xAA;       // Erase Sector (2. Cycle)
+  135  1        (*((uword far *) (ulPage_Addr))) = 0x03;      // Erase Sector (3. Cycle)
+  136  1        return (Flash_Check());                             // Check until Device Ready
+  137  1      }
+  138         
+  139         ////////////////////////////////////////////////////////
+  140         // Function to Program one flash data page.
+  141         // *    Parameter:      adr:  Block Address
+  142         // *                    buf:  Block Data
+  143         // *    Return Value:   0 - OK,  1 - Failed
+  144         ////////////////////////////////////////////////////////
+  145         uword Flash_ProgramPage (ulong page_adr, void *buf) {
+  146  1        uword cnt, uwTmp;  
+  147  1        // Enter Page Mode
+  148  1        (*((uword far *) (base |0x00AA))) = 0x50;       // 1st cycle: write 50h to xx'00AAh
+  149  1        (*((uword far *) (page_adr))) = 0xAA;     // 2nd cycle: write AAh to page start address
+  150  1        uwTmp = (Flash_Check());                            // Check until Device Ready
+  151  1      
+  152  1        if (uwTmp == 0) 
+  153  1        {   
+  154  2          // Load Page
+  155  2          for (cnt = 0; cnt < 64; cnt++)  {
+  156  3            (*((uword far *) (base |0x00F2))) = (*(uword *)buf);       // write word from R4 to xx'00F2h
+  157  3            buf = (uword *) buf+1;
+  158  3          }
+  159  2          // Write Page
+  160  2          (*((uword far *) (base |0x00AA))) = 0xA0;       // 1st cycle: write A0h to xx'00AAh
+  161  2          (*((uword far *) (base |0x5A))) = 0xAA;         // 2nd cycle: : write AAh to xx'005A
+  162  2          uwTmp = Flash_Check();                          // Check until Device Ready
+  163  2        }
+  164  1        return (uwTmp); 
+  165  1      }
+  166         
+  167         /////////////////////////////////////////////////////////
+  168         // Function to calculate sector start address from sector number.
+  169         // physical sectors all of 4k size are used
+  170         // *    Parameter:      adr:  Block Address
+  171         // *    Return Value:   
+  172         ////////////////////////////////////////////////////////
+  173         ulong calculate_sector (ubyte ubSectorNr) {
+  174  1          uword uwAddrH, uwAddrL;
+  175  1          ulong ulAddr;
+  176  1          uwAddrL = 0;
+  177  1          uwAddrH = 0x00C0;
+  178  1          while (ubSectorNr!=0)
+  179  1          {
+C166 COMPILER V7.54.0.0, FLASHDEV                                                          08/29/2019 09:45:15 PAGE 4   
+
+  180  2             ubSectorNr--; 
+  181  2             uwAddrL += 0x1000; 
+  182  2          }
+  183  1          ulAddr =  (((ulong) uwAddrH << 16) | uwAddrL); 
+  184  1          return ulAddr;
+  185  1      }
+  186         /////////////////////////////////////////////////////////
+  187         // void delay(void)
+  188         //    
+  189         ////////////////////////////////////////////////////////
+  190         void delay(void)
+  191         {
+  192  1        long counter;
+  193  1        for (counter =0; counter <0xFFFFFFFF; counter++) {;} // delay for hardware
+  194  1      }
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         588     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =           4     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+
+
+C166 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

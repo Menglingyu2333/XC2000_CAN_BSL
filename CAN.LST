@@ -1,0 +1,69 @@
+C166 COMPILER V7.54.0.0, CAN                                                               08/29/2019 09:45:14 PAGE 1   
+
+
+C166 COMPILER V7.54.0.0, COMPILATION OF MODULE CAN
+OBJECT MODULE PLACED IN .\CAN.obj
+COMPILER INVOKED BY: D:\Keil_C166\C166\BIN\C166.EXE ..\CAN.C MODV2 BROWSE MODV2 DEBUG OBJECT(.\CAN.obj) 
+
+ stmt lvl     source
+
+    1         /**************************************************************************
+    2         **                                                                        *
+    3         **  INFINEON XC20007XE16x AP16164 , CAN_loader, Version 1.0               *
+    4         **                                                                        *
+    5         **  Id: CAN.c 2009-10-1 YS                                                *
+    6         **                                                                        *
+    7         **  DESCRIPTION :                                                         *
+    8         **        - commands for handshake between ’host’ and ’slave’ board       *
+    9         **        - Defines a port pin to signal the process status               *
+   10         **        - Flash Programming Functions for XC2xxx (On-chip Flash)        *
+   11         **        - Code location: the internal PSRAM at address 0xE0,0000        *
+   12         **************************************************************************/
+   13         #include "MAIN.H"
+   14         
+   15         //****************************************************************************
+   16         // @Function      void CAN_vTransmit(ubyte ubObjNr) 
+   17         //****************************************************************************
+   18         void CAN_vTransmit(ubyte ubObjNr)
+   19         {
+   20  1        CAN_HWOBJ[ubObjNr].uwMOCTRH = 0x0720;  // set TXRQ,TXEN0,TXEN1,MSGVAL
+   21  1      }   
+   22         
+   23         ///////////////////////////////////////////////////////////////////////////////
+   24         // SendAck
+   25         ///////////////////////////////////////////////////////////////////////////////
+   26         void SendAck(ubyte ubACK, ubyte ubTmp)
+   27         {
+   28  1        CAN_HWOBJ[1].uwMOCTRH = 0x0008;       // set NEWDAT
+   29  1        CAN_HWOBJ[1].MODATAn32bit.ubData[0] = ubACK;
+   30  1        CAN_HWOBJ[1].MODATAn32bit.ubData[1] = ubTmp; 
+   31  1        CAN_HWOBJ[1].uwMOCTRL = 0x0040;       // reset RTSEL
+   32  1        while(!CAN_ubRequestMsgObj(1));
+   33  1        CAN_HWOBJ[1].uwMOCTRH = 0x0720;  // set TXRQ,TXEN0,TXEN1,MSGVAL
+   34  1      
+   35  1      }
+   36         
+   37         
+
+
+MODULE INFORMATION:   INITIALIZED  UNINITIALIZED
+  CODE SIZE        =         110     --------
+  NEAR-CONST SIZE  =    --------     --------
+  FAR-CONST SIZE   =    --------     --------
+  HUGE-CONST SIZE  =    --------     --------
+  XHUGE-CONST SIZE =    --------     --------
+  NEAR-DATA SIZE   =    --------     --------
+  FAR-DATA SIZE    =    --------     --------
+  XHUGE-DATA SIZE  =    --------     --------
+  IDATA-DATA SIZE  =    --------     --------
+  SDATA-DATA SIZE  =    --------     --------
+  BDATA-DATA SIZE  =    --------     --------
+  HUGE-DATA SIZE   =    --------     --------
+  BIT SIZE         =    --------     --------
+  INIT'L SIZE      =    --------     --------
+END OF MODULE INFORMATION.
+C166 COMPILER V7.54.0.0, CAN                                                               08/29/2019 09:45:14 PAGE 2   
+
+
+
+C166 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

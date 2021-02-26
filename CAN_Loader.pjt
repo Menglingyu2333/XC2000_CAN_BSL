@@ -1,0 +1,298 @@
+;Codewright Project File (do not remove or modify this line)
+[ProjInit]
+ConfigSetExtMode=2
+ProjSetConfigFlags=0x04110940
+
+[State]
+SysSetCwd='C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader'
+SrchSetFlags=0x0412680a
+SrchSetAgainFlags=0x04036004,0
+SrchSetAgainFlags=0x0613e008,1
+FileSortMode=0x0
+_StateHistory=FILELIST,'C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\MAIN.H','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\MAIN.C','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\MainApplication_XE16x\MAIN.C','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\CAN.C','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\main.lst','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\FlashDev.c','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\MAIN.C','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\_can_loader.xvo','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\main.lst'
+_StateHistory=SEARCH,'Flash_erase_page','DISWDT','CAN_LOADER_EXECUTION','ProgramBlock','CANLoader_4K','CAN_BSL_EXECUTION','SCU_SWRSTCON','delay','   case 0x20:// Done downloading so do a software reset      for standard start','EINIT'
+_StateHistory=REPLACE,'ulSector_Addr','uwDataBlock','uwDatPage_128Byte','ProgramPage','Flash_Check','Flash_Init','Flash_UnInit','Flash_erase_sector','Flash_erase_page','Flash_ProgramPage'
+_StateHistory=EDITFILE,'C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\SCS.H','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\MAIN','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\XC22xxREGS','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\.map','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\can_loader','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\_can_loader','C:\Projekte\MC_Projekte\P11\MR\Projects\LED_blink\LED_blink','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\main','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\_can_loader','C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\main'
+_StateHistory=DOCUMENTVISIT,'160         23          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\MainApplication_XE16x\MAIN.C','165         27          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\MainApplication_XE16x\MAIN.C','152         28          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\MAIN.C','1           1           C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\_can_loader.xvo','152         28          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\MAIN.C','1           1           C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\main.lst','154         28          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\MAIN.C','600         18          C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CAN_Loader\main.lst'
+_StateDocumentVisit=8
+
+[Editor]
+_RestoreSysFlags=0x43097fc8, 0xfffffffc, 0
+_RestoreSysFlags=0x40010005, 0xffffffff, 1
+CollapseMode=0x13080610
+FilterProjDeleteList 
+FilterProjAdd='Source Files','*.c;*.cc;*.cpp;*.cxx;*.ic;*.c96;*.fle;*.cmp;*.asm;*.src;*.s;*.a96;*.i;*.pcp;*.68k',-1
+FilterProjAdd='Header Files','*.h;*.h68;*.inc;*.sfr',-1
+FilterProjAdd='Project Files','*.pjt',-1
+FilterProjAdd='Resources','*.rc;*.bmp;*.ico;*.cur;*.dlg',-1
+FilterProjAdd='Other Files','*.*',-1
+VCSProject=''
+VCSProjectPath=''
+VCSProjectLocalPath=''
+ScrapSetCount=1
+ClipboardSetCount=1
+ClipboardEnableSepStr=1
+ClipboardSetSepStr='\r\n',0
+ClipboardEnableTermStr=1
+ClipboardSetTermStr='\r\n',0
+
+[Tools]
+ToolDeleteList 
+ToolAddCmd='$_custom_tool_$_1','API Database Editor',1342177312,'cwtedit.exe'
+
+[Compiler]
+TagSetCmd='"${HOME}${WTAGS}" -oc -d -t"${TAGFILE}.tag" -p"${TAGFILE}.ptg"',0x8000060
+BrowseSetFile='C:\Program Files\Hitex\HiTOP52-U-CAN-XC164CM\examples\User_YS_CAN\CAN_BSLMaster.ptg'
+TagSetFile='C:\Program Files\Hitex\HiTOP52-U-CAN-XC164CM\examples\User_YS_CAN\CAN_BSLMaster.tag'
+CompilerAddCmdEx='TASKING src','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING src',
+CompilerAddCmdEx='TASKING ccm','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING ccm',
+CompilerAddCmdEx='TASKING fle','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING fle',
+CompilerAddCmdEx='TASKING asm','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING asm',
+CompilerAddCmdEx='TASKING icm','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING icm',
+CompilerAddCmdEx='TASKING cxx','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING cxx',
+CompilerAddCmdEx='TASKING cc','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING cc',
+CompilerAddCmdEx='TASKING cmp','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING cmp',
+CompilerAddCmdEx='$_cw_proj_hash_$','',1073741920,'',1073741920,'!EdeExecBuild()',1073741984,'',0,'!EdeExecRebuild()',1073741984,'',0,'!EdeExecDebug()',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err','%x'
+CompilerAddResponse='$_cw_proj_hash_$',
+CompilerAddCmdEx='TASKING ic','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING ic',
+CompilerAddCmdEx='TASKING cpp','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING cpp',
+CompilerAddCmdEx='TASKING c','!EdeExecCompile()',1073741920,'!EdeExecCompile()',1073741920,'',1073741984,'',0,'',1073741984,'',0,'',1073741856,'',0,'_TaskingErrorInfo','','','c:\projekte\appnote_web\review\p11_can_flash\canloader\can_loader.err',''
+CompilerAddResponse='TASKING c',
+CompilerNewExt=.v
+CompilerNewExt=.src
+CompilerNewExt=.htm
+CompilerNewExt=.bas
+CompilerNewExt=.awk
+CompilerNewExt=.jsp
+CompilerNewExt=.cfml
+CompilerNewExt=.adb
+CompilerNewExt=.vhd
+CompilerNewExt=.pl
+CompilerNewExt=.pas
+CompilerNewExt=.tk
+CompilerNewExt=.rul
+CompilerNewExt=.asp
+CompilerNewExt=.js
+CompilerNewExt=.cob
+CompilerNewExt=.tcl
+CompilerNewExt=.rc
+CompilerNewExt=.php
+CompilerNewExt=.cc
+CompilerNewExt=.ini
+CompilerNewExt=.html
+CompilerNewExt=.bat
+CompilerNewExt=.cs
+CompilerNewExt=.txt
+CompilerNewExt=.nrx
+CompilerNewExt=.xml
+CompilerNewExt=.sqlj
+CompilerNewExt=.java
+
+[VersionControl:PVCS]
+VCSSetCmd=VCS_CHECKIN_ID,'put -n -T@"%Q" -M@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKINLOCK_ID,'put -n -T@"%Q" -M@"%Q" -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUT_ID,'get -y "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUTLOCK_ID,'get -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOCK_ID,'vcs -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKUNLOCK_ID,'vcs -y -u "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLABEL_ID,'vcs -y -v"${VCSLABEL}" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOG_ID,'vlog "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKPROP_ID,'vlog -b "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKDIFF_ID,'vdiff -r "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKMENU_ID,'pvcsvmwn',0x8000000
+VCSSetCmd=VCS_ADD_ID,'vcs -i -t@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_REMOVE_ID,'del /f "%b%{??v|___}e"',0x8000040
+
+[Files]
+.\MAIN.C
+.\start.asm
+.\FlashDev.c
+.\MAIN.H
+.\CAN.C
+.\XC22xxREGS.H
+.\can_loader.map
+
+[Ede]
+Toolchain=c:\program files\tasking\c166 v8.7r3\etc\c166.dol
+ToolchainName=TASKING Tools for C166/ST10  v8.7r3
+ProjectDir=c:\projekte\appnote_web\review\p11_can_flash\can_loader
+EdeVersion=99.9r9 (Build 150)
+CodeWrightVersion=6.5b
+DefBuildSettings=True
+SaveFiles=True
+AbsolutePathNames=False
+StopAfterError=True
+KeepTmpFiles=False
+ExtMakefile=False
+ExtMakefileName=
+UserMakefile=False
+UserMakefileName=
+UseMakeOptions=False
+MakeOptions=
+CheckTarget=True
+ExtDebugger=False
+ExtDebuggerName=
+UseDOSShell=False
+SaveOptionMethod=0
+SaveOptionFileName=c:\projekte\appnote_web\review\p11_can_flash\can_loader\can_loader.opt
+LoadOptionFileName=c:\projekte\appnote_web\review\p11_can_flash\backup\canloader\tasking_canbsl.opt
+LoadOptionStartup=False
+GroupProc=0
+GroupCpp=0
+GroupC=0
+GroupMisraC=0
+GroupAsm=0
+GroupMpp=0
+GroupLL=0
+GroupXvw=0
+DASSetup=0
+GroupList=GroupProc,GroupCpp,GroupC,GroupMisraC,GroupAsm,GroupMpp,GroupLL,GroupXvw,DASSetup
+
+[Directories]
+BinDir1=$(PRODDIR)\bin
+IncDir1=$(PRODDIR)\include
+LibDir1=$(PRODDIR)\lib
+
+[DefaultOptions]
+CpuType=CpuXC2287
+CpuDerivative=FlashXC228796F
+FlashEnable0=0
+OnChipRamEnable=0
+CpuMemSize=400000h
+CpuIRAMReserve=0F200h-0F5FFh
+CpuCPUAddStartupCode=0
+CpuEva=0
+CpuBitInit=1
+FlashVectorBaseAddress=LocVecTabAddrSpecify
+PLLCON=0x7889
+RSTCON=0x0
+SPSEG=0x0
+SYSCON0=0x0002
+SYSCON1=0x0
+SYSCON2=0x0
+SYSCON3=0x0
+VECSEG_enable=1
+VECSEG=0x00C0
+XPERCON=0x0
+ADDRSEL1=0x0
+ADDRSEL2=0x0
+ADDRSEL3=0x0
+ADDRSEL4=0x0
+ADDRSEL5=0x0
+ADDRSEL6=0x0
+ADDRSEL7=0x0
+BUSCON0_enable=1
+BUSCON0=0x0
+BUSCON1=0x0
+EBCMOD0_enable=1
+EBCMOD0=0x7400
+EBCMOD1=0x003F
+FCONCS0=0x0
+FCONCS1=0x0
+FCONCS2=0x0
+FCONCS3=0x0
+FCONCS4=0x0
+FCONCS5=0x0
+FCONCS6=0x0
+FCONCS7=0x0
+TCONBURSTCS0=0x0
+TCONBURSTCS1=0x0
+TCONBURSTCS2=0x0
+TCONBURSTCS3=0x0
+TCONBURSTCS4=0x0
+TCONBURSTCS5=0x0
+TCONBURSTCS6=0x0
+TCONBURSTCS7=0x0
+TCONCS0=0x0
+TCONCS1=0x0
+TCONCS2=0x0
+TCONCS3=0x0
+TCONCS4=0x0
+TCONCS5=0x0
+TCONCS6=0x0
+TCONCS7=0x0
+XADRS1=0x0
+XADRS2=0x0
+XADRS3=0x0
+XADRS4=0x0
+XADRS5=0x0
+XADRS6=0x0
+XBCON1=0x0
+XBCON2=0x0
+XBCON3=0x0
+XBCON4=0x0
+XBCON5=0x0
+XBCON6=0x0
+CMCTR_enable=1
+CMCTR=0x8000
+WDTCON=0x0
+CppDefineList=CppDefineMacro
+LnkLocPrintfFmt=LnkLocSMALLPrintfFmt
+MC6=0
+MC16=0
+MC25=0
+MC77=0
+MC95=0
+MC99=0
+MC103=0
+MC107=0
+MC108=0
+MC109=0
+MC110=0
+MC116=0
+MC117=0
+AsmListPagWid=132
+AsmCase=1
+MplListFilePageWidth=132
+OutTasking=1
+OutIHex=1
+OutVectorStartAddrIEEE=0
+OutSelectStartAddrIEEE=1
+OutIHexType=OutIHexType32
+OutVectorStartAddrIHex=0
+OutSelectStartAddrIHex=1
+OutSRecType=OutSrecType32
+OutVectorStartAddrSRec=0
+OutSelectStartAddrSRec=1
+OutVectorStartAddrHitex=0
+OutSelectStartAddrHitex=1
+OutVectorStartAddrKontron=0
+OutSelectStartAddrKontron=1
+LnkLocSymbTab=1
+LnkLocSummary=1
+LocMemList=LocMemListType,LocMemListTypeRom,LocMemListTypeRam,LocMemListTypeRam,LocMemListStart,0E00000h,000C000h,0F600h,LocMemListEnd,0E00FFFh,000CFFFh,0FDFFh,LocMemListFill,,,,LocMemListPattern,,,,LocMemListNotes
+LocReserveMemList=LocReserveMemStart,LocReserveMemEnd
+XvwMonReserveDefault=0
+LocVecTabAddrSpecifyValue=0E00000h
+LocVecTabSize=0
+CpuExt2SskSegment=00
+CpuExt2SskTop=0FC00h
+LocSecSizeList=LocSecSizeName,LocSecSizeType,LocSecSizeValue
+LocAssignSymList=LocAssignSymName
+LnkLocDispAllWarn=0
+LnkLocSupprAllWarn=1
+LnkWarningAsError=1
+FlashWorkspace=0xc000
+XvwConfigList=XvwConfigField,TerminateServer,XvwConfigValue,1
+Inf_xc164cs_das_singleCfgVECSEG_cfginit=0
+CustomInf_xc22xxm_das_singleCfg_cfginit=
+XvwPlaybackStepByStep=1
+
+[Options]
+FileList=
+
+[Project]
+ConfigSetLinkDBFilename='C:\Documents and Settings\SunYajun\Local Settings\Application Data\TASKING\SW019800\v8.7r2\cwright.ldb'
+ConfigSetMarkDBFilename='C:\Documents and Settings\SunYajun\Local Settings\Application Data\TASKING\SW019800\v8.7r2\cwright.mrk'
+ConfigSetSymbolDBFilename='C:\Projekte\AppNote_WEB\Review\P11_CAN_Flash\CANLoader\CAN_Loader.sbl'
+EditSetPath=''
